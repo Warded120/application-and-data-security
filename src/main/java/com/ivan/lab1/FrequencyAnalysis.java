@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 public class FrequencyAnalysis {
 
+    // English letters ordered by frequency (most to least, 'e' most common)
     private static final char[] ENGLISH_FREQUENCY = {
             'e', 't', 'a', 'o', 'i', 'n', 's', 'h', 'r', 'd',
             'l', 'u', 'c', 'm', 'w', 'f', 'g', 'y', 'p', 'b',
@@ -18,6 +19,11 @@ public class FrequencyAnalysis {
         try {
             String encryptedText = FileManager.readEncryptedFile();
 
+            // Clean text by:
+            // 1. Converting to lowercase (e.g., 'A' → 'a')
+            // 2. Filtering letters only (a-z)
+            // 3. Converting codes to strings
+            // 4. Joining into a single string
             String cleanText = encryptedText.toLowerCase()
                     .chars()
                     .filter(Character::isLetter)
@@ -25,6 +31,7 @@ public class FrequencyAnalysis {
                     .collect(Collectors.joining());
 
             Map<Character, Integer> frequencyMap = new HashMap<>();
+            // Initialize map with all letters (a-z) set to 0
             for (char c = 'a'; c <= 'z'; c++) {
                 frequencyMap.put(c, 0);
             }
@@ -36,6 +43,7 @@ public class FrequencyAnalysis {
             }
 
             List<Map.Entry<Character, Integer>> sortedEntries = new LinkedList<>(frequencyMap.entrySet());
+            // Sort by frequency descending (higher counts first)
             sortedEntries.sort((e1, e2) -> e2.getValue().compareTo(e1.getValue()));
 
             System.out.println("Frequency analysis:");
@@ -44,6 +52,7 @@ public class FrequencyAnalysis {
             for (Map.Entry<Character, Integer> entry : sortedEntries) {
                 int count = entry.getValue();
                 if (count > 0) {
+                    // Calculate percentage: (count / total) * 100
                     double frequency = (double) count / totalChars * 100;
                     System.out.printf("%-10c%-10d%.2f%n", entry.getKey(), count, frequency);
                 }
@@ -51,6 +60,10 @@ public class FrequencyAnalysis {
 
             if (totalChars > 0 && !sortedEntries.isEmpty()) {
                 char mostFrequentChar = sortedEntries.get(0).getKey();
+                // Estimate shift:
+                // 1. (mostFrequentChar - 'e'): Difference in ASCII (e.g., 'i' - 'e' = 4)
+                // 2. + 26: Avoid negative values
+                // 3. % 26: Wrap around alphabet
                 int probableShift = (mostFrequentChar - ENGLISH_FREQUENCY[0] + 26) % 26;
 
                 System.out.println("\nShift analysis:");
