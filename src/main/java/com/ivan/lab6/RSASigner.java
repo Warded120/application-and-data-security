@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RSASigner {
-    // Modulus n = 33 (p * q, where p=3, q=11 for RSA)
+    // Private Modulus n = 33 (p * q, where p=3, q=11 for RSA)
     private static final int n = 33;
     // Public exponent e = 7 (coprime with (p-1)*(q-1) = 20)
     private static final int E = 7;

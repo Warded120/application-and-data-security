@@ -321,7 +321,7 @@ public class SDESCipher {
 
             // Test 2: Fixed string
             System.out.println("--------------------------------");
-            String test1 = "BIMBABOMBA101010LALAAL";
+            String test1 = "Hello";
             byte[] test1Bytes = test1.getBytes();
             byte[] test1Enc = new byte[test1Bytes.length];
             // Encrypt with same key
@@ -339,7 +339,7 @@ public class SDESCipher {
 
             // Test 3: Another string with different key
             System.out.println("--------------------------------");
-            String test2 = "HELLO0MY0NAME0IS0IVAN";
+            String test2 = "test1234";
             byte[] test2Bytes = test2.getBytes();
             byte[] test2Enc = new byte[test2Bytes.length];
             // Encrypt with key "0011110000"

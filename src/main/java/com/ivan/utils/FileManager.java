@@ -11,9 +11,9 @@ import java.nio.file.Paths;
 @UtilityClass
 public class FileManager {
 
-    private static final String INPUT_EN_FILE = "input-en.txt";
-    private static final String INPUT_UK_FILE = "input-uk.txt";
-    private static final String OUTPUT_FILE = "encrypted.txt";
+    public static final String INPUT_EN_FILE = "input-en.txt";
+    public static final String INPUT_UK_FILE = "input-uk.txt";
+    public static final String OUTPUT_FILE = "encrypted.txt";
 
     public static String readInputFile(Locale locale) throws IOException {
         String filename = locale == Locale.EN ? INPUT_EN_FILE : INPUT_UK_FILE;
