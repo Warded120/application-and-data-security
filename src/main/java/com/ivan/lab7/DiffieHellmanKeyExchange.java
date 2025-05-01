@@ -6,7 +6,7 @@ import java.util.Random;
 public class DiffieHellmanKeyExchange {
     public static void main(String[] args) {
         // Step 1: Select a large prime number p (at least 4 digits)
-        BigInteger p = BigInteger.valueOf(10007); // A 5-digit prime number
+        BigInteger p = BigInteger.valueOf(10007); // A minimum 4-digit prime number
         System.out.println("Selected prime number p: " + p);
 
         // Step 2: Find a primitive root a for p
@@ -16,12 +16,12 @@ public class DiffieHellmanKeyExchange {
         // Step 3: Perform Diffie-Hellman key exchange
         // Party A generates private key x
         Random rand = new Random();
-        BigInteger x = new BigInteger(p.bitLength(), rand).mod(p.subtract(BigInteger.ONE)).add(BigInteger.ONE);
+        BigInteger x = new BigInteger(p.bitLength(), rand).mod(p.subtract(BigInteger.ONE)).add(BigInteger.ONE);//xi = xi-1^2 mod n
         BigInteger X = a.modPow(x, p); // A computes X = a^x mod p
         System.out.println("A's public key X: " + X);
 
         // Party B generates private key y
-        BigInteger y = new BigInteger(p.bitLength(), rand).mod(p.subtract(BigInteger.ONE)).add(BigInteger.ONE);
+        BigInteger y = new BigInteger(p.bitLength(), rand).mod(p.subtract(BigInteger.ONE)).add(BigInteger.ONE);//yi = yi-1^2 mod n
         BigInteger Y = a.modPow(y, p); // B computes Y = a^y mod p
         System.out.println("B's public key Y: " + Y);
 
