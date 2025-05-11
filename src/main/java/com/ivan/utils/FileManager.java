@@ -53,8 +53,32 @@ public class FileManager {
     public static void writeOutputFile(String text) throws IOException {
         Path path = Paths.get("src/main/resources/" + OUTPUT_FILE);
         BufferedWriter writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8);
-
         writer.write(text);
         writer.close();
+    }
+
+    public static void writeInputFile(String text) throws IOException {
+        Path path = Paths.get("src/main/resources/" + INPUT_EN_FILE);
+        BufferedWriter writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8);
+        writer.write(text);
+        writer.close();
+    }
+
+    public static byte[] readLargeBinaryFile(String filePath) throws IOException {
+        return Files.readAllBytes(Paths.get(filePath));
+    }
+
+    public static void writeLargeBinaryFile(String filePath, byte[] data) throws IOException {
+        try (FileOutputStream fos = new FileOutputStream(filePath)) {
+            fos.write(data);
+        }
+    }
+
+    public static String readLargeFile(String filePath) throws IOException {
+        return new String(Files.readAllBytes(Paths.get(filePath)), StandardCharsets.UTF_8);
+    }
+
+    public static void writeLargeFile(String filePath, String text) throws IOException {
+        Files.write(Paths.get(filePath), text.getBytes(StandardCharsets.UTF_8));
     }
 }
